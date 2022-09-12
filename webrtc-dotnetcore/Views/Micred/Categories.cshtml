@@ -1,0 +1,160 @@
+﻿@model webrtc_dotnetcore.Model.ClientViewModel
+@{
+    ViewData["Title"] = "Choose Sector";
+}
+<!-- <body data-layout="horizontal" data-topbar="dark"> -->
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-center">
+                                    <h4 class="mb-0 font-size-18">Ծառայություններ</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between align-items-center">
+
+                            @foreach (var item in Model.TopRatedOrganizations)
+                            {
+                                <div class="col-4 mb-3 ">
+                                    <div class="rounded">
+                                        <a asp-action="GetOrganizationDetails" asp-controller="Micred" asp-route-id="@item.Id" title="@item.Name">
+                                            <img src="@item.Logo"
+                                                 class="w-100" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="row relative justify-content-center">
+                            <form class="app-search w-50" autocomplete="off" action="/action_page.php">
+                                <div class="position-relative autocomplete w-100">
+                                    <input type="text" class="form-control search" id="service-search"
+                                           placeholder="Search...">
+                                    <span class="bx bx-search-alt text-primary"></span>
+                                </div>
+                            </form>
+
+
+                        </div>
+                        <ul class="nav nav-tabs nav-tabs-custom nav-justified border-bottom-0 " role="tablist">
+                            <li class="nav-item">
+                                <a href="javascript: void(0);" class="nav-link active" data-bs-toggle="tab" data-bs-target=".byField" role="tab">
+                                    <span>Ըստ ոլորտների</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript: void(0);" class="nav-link" data-bs-toggle="tab" data-bs-target=".byType" role="tab">
+                                    <span>Ըստ տեսակների</span>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content bg-white   text-muted">
+                            <div class="tab-pane active byField" role="tabpanel">
+                                <ul class="list-unstyled sector-list">
+                                    @if (Model.Categories.Any())
+                                    {
+                                        foreach (var item in Model.Categories)
+                                        {
+                                            <li>
+                                                <a asp-controller="Micred" asp-action="Organizations" asp-route-id="@item.Id">
+                                                    <div class="media d-flex align-items-center">
+                                                        <div class="align-self-center mr-3">
+                                                            <img src="~/@item.Picture"
+                                                                 class="rounded-circle avatar-sm" alt="@item.Name">
+                                                        </div>
+
+                                                        <div class="media-body overflow-hidden">
+                                                            <h5 class="text-truncate font-size-14 mb-1">@item.Name</h5>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="text-center">No Categories found</div>
+                                    }
+
+
+                                </ul>
+                            </div>
+                            <div class="tab-pane byType" role="tabpanel">
+                                <ul class="list-unstyled sector-list">
+                                    @if (Model.Categories.Any())
+                                    {
+                                        foreach (var item in Model.Categories)
+                                        {
+                                            <li>
+                                                <a asp-controller="Micred" asp-action="Organizations" asp-route-id="@item.Id">
+                                                    <div class="media d-flex align-items-center">
+                                                        <div class="align-self-center mr-3">
+                                                            <img src="~/@item.Picture"
+                                                                 class="rounded-circle avatar-sm" alt="@item.Name">
+                                                        </div>
+
+                                                        <div class="media-body overflow-hidden">
+                                                            <h5 class="text-truncate font-size-14 mb-1">@item.Name </h5>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="text-center">No Categories found</div>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+
+
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+<!-- JAVASCRIPT -->
+@section Scripts{
+
+    <!-- App js -->
+    <script src="~/assets/js/app.js"></script>
+    <!-- <script src="assets/js/search.js"></script> -->
+    <script src="~/assets/js/pages/autocomplate.js"></script>
+    <script>
+        var services = [
+            "TellCell",
+            "ACBA",
+            "TRFTR",
+            "BASIC",
+        ];
+        autocomplete(document.getElementById("service-search"), services);</script>
+}

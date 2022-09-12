@@ -1,0 +1,84 @@
+﻿@model List<webrtc_dotnetcore.Model.Micred.Organization>
+@{
+    ViewData["Title"] = "Choose Organization";
+}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <div class="row relative justify-content-center">
+                    <form class="app-search w-50" autocomplete="off" action="/action_page.php">
+                        <div class="position-relative autocomplete w-100">
+                            <input type="text" class="form-control search" id="service-search"
+                                   placeholder="Search...">
+                            <span class="bx bx-search-alt text-primary"></span>
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="tab-pane show active">
+                    <div>
+                        <ul class="list-unstyled sector-list" data-simplebar>
+                            @if (Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <li>
+                                        <a asp-action="GetOrganizationDetails" asp-controller="Micred" asp-route-id="@item.Id">
+                                            <div class="media d-flex align-items-center">
+                                                <div class="align-self-center mr-3">
+                                                    <img src="~/@item.Logo"
+                                                         class="rounded-circle avatar-sm" alt="@item.Name">
+                                                </div>
+
+                                                <div class="media-body overflow-hidden">
+                                                    <h5 class="text-truncate font-size-14 mb-1">@item.Name</h5>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <div class="text-center">No Categories found</div>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- container-fluid -->
+            </div>
+        </div>
+    </div>
+    <!-- End Page-content -->
+    </footer>
+</div>
+<!-- end main content-->
+    </div>
+<!-- END layout-wrapper -->
+<!-- JAVASCRIPT -->
+
+@section Scripts{
+    
+    <!-- <script src="assets/js/search.js"></script> -->
+    <script src="~/assets/js/pages/autocomplate.js"></script>
+    <script>
+        var services = [
+            "TellCell",
+            "ACBA",
+            "TRFTR",
+            "BASIC",
+        ];
+        autocomplete(document.getElementById("service-search"), services);</script>
+}

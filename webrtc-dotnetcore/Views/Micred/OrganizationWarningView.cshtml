@@ -1,0 +1,91 @@
+﻿@model webrtc_dotnetcore.Model.Micred.OrganizationDetails
+@{
+    var agentText = "";
+    if (Model.IsHaveActiveAgent == false)
+    {
+        agentText = "Բոլոր օպերատորները զբաղված են, Խնդրում եմ փորձել ավել ուշ կամ սեղմեք ստորև ստուգել օպերատորի առկայությունը կոճակը";
+    }
+
+}
+<!-- <body data-layout="horizontal" data-topbar="dark"> -->
+<!-- Begin page -->
+<div id="layout-wrapper">
+    
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-4">
+                        <!-- start page title -->
+                        <div class="row justify-content-center ">
+                            <div class="col-12  mb-3 ">
+                                <div class="rounded">
+                                    <img src=@Model.Logo
+                                         class="w-100" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-center">
+                                    <h4 class="mb-0 font-size-18">@Model.Name</h4>
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model.IsHaveActiveAgent == false)
+                        {
+                            <div class="row justify-content-center">
+                                <div class="col-12  mb-3 ">
+                                    <div class="alert alert-info w-100" role="alert">
+                                        @agentText
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (Model.IsHaveActiveAgent == false)
+                        {
+                            <div class="row justify-content-center">
+                                <div class="col-12  mb-3 ">
+                                    <a asp-action="GetOrganizationDetails" asp-controller="Micred" asp-route-id="@Model.Id" class="btn btn-info w-100 mb-3">Ստուգել Օպերատորի առկայությունը</a>
+                                </div>
+                            </div>
+                        }
+                        <div class="row justify-content-center">
+                            <div class=" col-12 ">
+                                <div class="card border border-primary">
+                                    <div class="card-body">
+                                        <div class="scroll-text mb-2">
+                                            <h5 class="card-title mt-0">@Model.Name</h5>
+                                            <p class="card-text">@Model.warningCl</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        @if (Model.IsHaveActiveAgent)
+                        {
+                            <div class="row justify-content-center">
+                                <div class="col-12  mb-3 text-center ">
+                                    <a class="btn btn-info w-100 mb-3" asp-action="Client" asp-controller="Micred" asp-route-id="@Model.Id" asp-route-roomId="@Model.RoomId" asp-route-sessionId="@Model.sessionid" asp-route-agentId="@Model.AgentId">Շարունակել</a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+        
+    </div>
+    <!-- end main content-->
+</div>
+<!-- END layout-wrapper -->
+<!-- JAVASCRIPT -->

@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Micred Client";
+}
+@model List<webrtc_dotnetcore.Model.Micred.ClientControl>
+@section StyleSheets{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/webrtc.css" type="text/css" />
+}
+
+<input type="hidden" id="roomNameTxt" />
+<input type="hidden" id="orgId" value="@ViewBag.OrgId" />
+<input type="hidden" id="sessionId" value="@ViewBag.SessionId">
+<input type="hidden" id="agentId" value="@ViewBag.AgentId">
+
+<!-- <body data-layout="horizontal" data-topbar="dark"> -->
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-4 ">
+                        <div class="card ">
+                            <div class="card-body">
+                                <div class="row justify-content-center ">
+                                    <div class="connectionStatus">
+                                        <p id="connectionStatusMessage"></p>
+                                    </div>
+                                    <div class="col-12  mb-3 ">
+                                        <video id="localVideo" muted="muted" autoplay playsinline" controls class="embed-responsive embed-responsive-4by3"></video>
+                                        <video id="remoteVideo" style="display:none" autoplay playsinline controls class="embed-responsive embed-responsive-4by3"></video>
+                                        <div>
+                                            <span id="errorMsg"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 4:3 aspect ratio -->
+                                <div id="roomTable" class="row justify-content-center mb-4">
+                                    <button id="joinRoomBtn" class="btn btn-primary">Միանալ</button>
+                                    <input type="button" id="homeBtn" value="Home" onclick="location.href='@Url.Action("Categories", "Micred")'" />
+                                    <input id="roomId" type="hidden" value="@ViewBag.RoomId">
+                                </div>
+                                <!-- start page title -->
+                                <div class="row justify-content-center ">
+                                    <div class="col-12  mb-3 ">
+                                        <form id="dataChannelSend" class="needs-validation" novalidate>
+                                            @foreach (var item in Model)
+                                            {
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="form-group">
+                                                        <label for="validationCustom01">@item.item_name</label>
+                                                        <input type="@item.type_name" class="form-control" id="@item.control_id" name="@item.item_name."  required>
+                                                    </div>
+                                                </div>
+                                            }
+                                            <button id="sendButton" type="button" class="btn btn-primary">Ուղղարկել տվյալները</button>
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12  mb-3">
+
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="fileInput" aria-describedby="inputGroupFileAddon04">
+                                                <label class="custom-file-label" for="fileInput">Ընտրել ֆայլ</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button" id="sendFileBtn">Ուղղարկել ֆայլը</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="table-responsive">
+                                        <table id="fileTable" class="table table-nowrap table-centered table-hover mb-0">
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+    <!-- end main content-->
+</div>
+<!-- END layout-wrapper -->
+<!-- JAVASCRIPT -->
+
+
+
+@section Scripts{
+    <script type="text/javascript" src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/js/webrtcClient_1.0.js"></script>
+    <script src="~/assets/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="~/assets/js/pages/form-validation.init.js"></script>
+    <script src="~/assets/js/pages/form-element.init.js"></script>
+}

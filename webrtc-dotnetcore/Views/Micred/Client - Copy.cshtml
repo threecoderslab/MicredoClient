@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Micred Client";
+}
+
+@section StyleSheets{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/webrtc.css" type="text/css" />
+}
+
+<input type="hidden" id="roomNameTxt" />
+<input type="hidden" id="orgId" value="@ViewBag.OrgId" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <div>
+                <table id="roomTable" class="display" style="width:100%;">
+                    <thead>
+                        <tr style="display:none;">
+                            <th>Room ID</th>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md8 col-sm-8">
+            <div>
+                <div class="connectionStatus">
+                    <p id="connectionStatusMessage"></p>
+                </div>
+                <div class="videoArea">
+                    <video id="localVideo" muted="muted" autoplay playsinline"></video>
+                    <video id="remoteVideo" style="display:none" autoplay playsinline></video>
+                    <div>
+                        <span id="errorMsg"></span>
+                    </div>
+                </div>
+                <p>File sharing</p>
+                <div id="fileShare">
+                    <input type="file" id="fileInput">
+                    <button id="sendFileBtn" class="btn btn-info sendFileBtn">Send</button>
+                </div>
+                <table id="fileTable" class="fileTable">
+                    <thead>
+                        <tr>
+                            <th>Received Files</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript" src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/js/webrtcClient_1.0.js"></script>
+}

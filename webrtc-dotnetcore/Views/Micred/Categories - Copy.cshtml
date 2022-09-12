@@ -1,0 +1,22 @@
+﻿@model List<webrtc_dotnetcore.Model.Micred.Category>
+@{
+    ViewData["Title"] = "Choose Sector";
+}
+<div class="card-deck">
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <div class="card">
+                <a asp-controller="Micred" asp-action="Organizations" asp-route-id="@item.Id"><img class="card-img-top" src="~/@item.Picture" alt="@item.Name"></a>
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div>No Categories found</div>
+    }
+</div>

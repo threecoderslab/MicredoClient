@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Micred Agent";
+}
+
+@section StyleSheets{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/webrtc.css" type="text/css" />
+}
+
+<div class="roomCreate">
+    <input type="hidden" id="roomId" />
+    <button id="createRoomBtn" class="btn btn-success">Available</button>
+    <button id="deleteRoomBtn" class="btn btn-danger">Not Available</button>
+    <input id="UserId" type="hidden" value="@ViewBag.UserId">
+    <input id="UserName" type="hidden" value="@ViewBag.UserName">
+    <input id="OrganizationId" type="hidden" value="@ViewBag.OrganizationId">
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <div>
+                <div class="connectionStatus">
+                    <p id="connectionStatusMessage"></p>
+                </div>
+                <div class="videoArea">
+                    <video id="localVideo" muted="muted" style="display:none" autoplay playsinline></video>
+                    <video id="remoteVideo" autoplay playsinline></video>
+                    <div class="row">
+                        <div class="col">
+                            <button id="startbutton" class="btn btn-info sendFileBtn">Take photo</button>
+                        </div>
+                        <div class="col">
+                            <button id="startbutton" class="btn btn-info sendFileBtn">Acra</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <span id="errorMsg"></span>
+                </div>
+                <p>File sharing</p>
+                <div id="fileShare">
+                    <input type="file" id="fileInput">
+                    <button id="sendFileBtn" class="btn btn-info sendFileBtn">Send</button>
+                </div>
+                <table id="fileTable" class="fileTable">
+                    <thead>
+                        <tr>
+                            <th>Received Files</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-4">
+            <img id="screenshot" alt="screenshot" src="">
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript" src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/js/webrtcAgent_1.3.js"></script>
+}
